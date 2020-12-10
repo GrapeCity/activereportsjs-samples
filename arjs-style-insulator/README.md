@@ -13,9 +13,9 @@ The hosting element's declaration can look like this:
 
 Check the [Report Designer Integration](https://www.grapecity.com/activereportsjs/docs/DeveloperGuide/ActiveReportsJSDesignerComponent/Integration) page for more information.
 
-Then open the ```designer.scss``` file and replace the CSS selector on line 3 with the selector that you use in the application. For example, it could be ```#designer-host```
+Then open the ```designer.scss``` file and replace the CSS selector on [line 3](https://github.com/GrapeCity/activereportsjs-samples/blob/73b77e124245dea05b329ff9dc5e235655e4dd91/arjs-style-insulator/designer.scss#L3) with the selector that you use in the application. For example, it could be ```#designer-host```
 
-If you are using a non-default theme for the designer component, replace paths on lines 3 and 8
+If you are using a non-default theme for the designer component, replace paths on lines [5](https://github.com/GrapeCity/activereportsjs-samples/blob/73b77e124245dea05b329ff9dc5e235655e4dd91/arjs-style-insulator/designer.scss#L5) and [8](https://github.com/GrapeCity/activereportsjs-samples/blob/73b77e124245dea05b329ff9dc5e235655e4dd91/arjs-style-insulator/designer.scss#L8)
 Check [Designer Themes](https://www.grapecity.com/activereportsjs/docs/DeveloperGuide/ActiveReportsJSDesignerComponent/Themes) page for more information.
 
 Run the following commands from the root folder of the package:
