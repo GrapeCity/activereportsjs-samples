@@ -1,0 +1,16 @@
+{
+  "name": "arjs-server-mode",
+  "version": "1.0.0",
+  "description": "Demo application that shows how to use ARJS on the server-side",
+  "main": "lib/index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "GrapeCity",
+  "license": "ISC",
+  "devDependencies": {},
+  "dependencies": {
+    "node-static": "^0.7.11",
+    "playwright": "^1.7.1"
+  }
+}
