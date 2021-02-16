@@ -1,0 +1,44 @@
+#app {
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
+}
+
+#list-host {
+  display: flex;
+  flex-direction: column;
+  flex: 0 0 auto;
+  height: 100%;
+  background-color: #f1f1f1;
+  overflow: hidden;
+}
+
+.activereportsjs-dark-theme #list-host {
+  background-color: #3b3c3f;
+  color: #e6e6e6;
+}
+
+#designer-host,
+#viewer-host {
+  flex: 1 1 auto;
+}
+
+.list-title {
+  align-items: center;
+  border-bottom: 1px solid #dbdbdb;
+  display: flex;
+  font-size: 1rem;
+  font-weight: 400;
+  height: 52px;
+  margin: 0 10px;
+  padding: 0 2px;
+  user-select: none;
+}
+
+.flex-grow-1 {
+  flex-grow: 1;
+}
+
+.flex-grow-0 {
+  flex-grow: 0;
+}

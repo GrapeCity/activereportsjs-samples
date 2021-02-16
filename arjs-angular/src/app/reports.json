@@ -1,0 +1,22 @@
+[
+    {
+        "name": "Tabular",
+        "src": "/assets/tabular-report.rdlx-json"
+    },
+    {
+        "name": "Banded",
+        "src": "/assets/BandedReport.rdlx-json"
+    },
+    {
+        "name": "Fixed Layout",
+        "src": "/assets/FixedLayout.rdlx-json"
+    },
+    {
+        "name": "Drill-down",
+        "src": "/assets/DrillDownReport.rdlx-json"
+    },
+    {
+        "name": "Drill-through",
+        "src": "/assets/DrillThroughMainReport.rdlx-json"
+    }
+]

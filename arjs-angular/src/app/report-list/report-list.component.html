@@ -1,0 +1,10 @@
+<ul>
+  <li
+    *ngFor="let report of reportList; index as i"
+    (click)="onItemClick(report, i)"
+    [class.gc-accent-color]="activeIndex === i"
+    [class.active]="activeIndex === i"
+  >
+    {{ report.name }}
+  </li>
+</ul>

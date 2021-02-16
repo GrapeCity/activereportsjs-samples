@@ -1,0 +1,14 @@
+[
+  {
+    "class": "activereportsjs-default-theme",
+    "name": "Default"
+  },
+  {
+    "class": "activereportsjs-light-theme",
+    "name": "Light"
+  },
+  {
+    "class": "activereportsjs-dark-theme",
+    "name": "Dark"
+  }
+]

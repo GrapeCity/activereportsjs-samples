@@ -1,0 +1,23 @@
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 6px 0;
+}
+
+li {
+  font-size: 0.875rem;
+  cursor: pointer;
+  padding: 6px 30px 6px 12px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  width: 100%;
+  overflow: hidden;
+  user-select: none;
+}
+
+li:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+li.active {
+  background-color: rgba(0, 0, 0, 0.05);
+}

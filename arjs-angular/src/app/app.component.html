@@ -1,0 +1,27 @@
+<div id="app" [class]="appClass">
+  <div id="list-host">
+    <div class="flex-grow-1">
+      <h5 class="list-title">Reports:</h5>
+      <app-report-list
+        [reportList]="reportList"
+        (selectionChanged)="reportSelectionChanged($event)"
+      ></app-report-list>
+    </div>
+    <div class="flex-grow-0">
+      <h5 class="list-title">Themes:</h5>
+      <app-theme-selector
+        [themeList]="themeList"
+        (themeChanged)="themeChanged($event)"
+      ></app-theme-selector>
+    </div>
+  </div>
+  <div id="designer-host" [hidden]="designerHidden">
+    <gc-activereports-designer
+      [report]="currentReport"
+      [onRender]="onRender"
+    ></gc-activereports-designer>
+  </div>
+  <div id="viewer-host" [hidden]="!designerHidden">
+    <gc-activereports-viewer (init)="onViewerInit()"></gc-activereports-viewer>
+  </div>
+</div>

@@ -1,0 +1,11 @@
+<ul>
+    <li
+      *ngFor="let theme of themeList; index as i"
+      [class.active]="activeIndex === i"
+      [class.gc-accent-color]="activeIndex === i"
+      (click)="onThemeChanged(theme, i)"
+    >
+      {{ theme.name }}
+    </li>
+  </ul>
+
