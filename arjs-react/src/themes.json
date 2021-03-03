@@ -1,0 +1,18 @@
+[
+  {
+    "id": "ar-js",
+    "name": "Default"
+  },
+  {
+    "id": "light-blue",
+    "name": "Light Blue"
+  },
+  {
+    "id": "green",
+    "name": "Green"
+  },
+  {
+    "id": "dark-yellow",
+    "name": "Dark Yellow"
+  }
+]

@@ -1,0 +1,22 @@
+{
+  "descriptors": [
+    {
+      "name": "Arial",
+      "weight": "400",
+      "style": "normal",
+      "source": "assets/Fonts/Arial/arial.ttf"
+    },
+    {
+      "name": "Arial",
+      "weight": "400",
+      "style": "italic",
+      "source": "assets/Fonts/Arial/ariali.ttf"
+    },
+    {
+		"name": "Arial",
+		"weight": "700",
+		"style": "normal",
+		"source": "assets/Fonts/Arial/arialbd.ttf"
+	  } 
+  ]
+}
