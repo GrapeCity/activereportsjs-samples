@@ -13,10 +13,9 @@ export type ReportDescriptior = {
   paginated: boolean;
 };
 
-export type UseDesignerProps = {
+export type DesignerProps = {
   report: ReportDescriptior;
   onRender: (report: ReportDefinition) => Promise<void>;
-  hostElem: any;
 };
 
 export type ViewerProps = {

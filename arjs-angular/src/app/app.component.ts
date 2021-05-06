@@ -4,9 +4,9 @@ import {
   HtmlExportService,
   PdfExportService,
   ViewerComponent,
+  DesignerComponent,
   XlsxExportService,
 } from '@grapecity/activereports-angular';
-import { DesignerComponent } from './activereports-designer/activereports-designer.component';
 import reports from './reports.json';
 import themes from './themes.json';
 
