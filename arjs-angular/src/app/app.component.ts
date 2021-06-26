@@ -1,4 +1,5 @@
 import { ChangeDetectorRef, Component, ViewChild } from '@angular/core';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import {
   AR_EXPORTS,
   HtmlExportService,
@@ -9,11 +10,12 @@ import {
 } from '@grapecity/activereports-angular';
 import reports from './reports.json';
 import themes from './themes.json';
+declare var require: any;
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css'],
+  styleUrls: ['./app.component.scss'],
   providers: [
     {
       provide: AR_EXPORTS,
@@ -38,13 +40,16 @@ export class AppComponent {
   toolbarUpdated = false;
   reportList = reports;
   themeList = themes;
-  appClass = themes[0].class;
+  public styles: SafeHtml;
 
   @ViewChild(ViewerComponent, { static: false }) reportViewer: ViewerComponent;
   @ViewChild(DesignerComponent, { static: false })
   reportDesigner: DesignerComponent;
 
-  constructor(private changeDetectorRef: ChangeDetectorRef) {
+  constructor(
+    private changeDetectorRef: ChangeDetectorRef,
+    private sanitizer: DomSanitizer
+  ) {
     this.onRender = this.onRender.bind(this);
   }
 
@@ -60,7 +65,25 @@ export class AppComponent {
     return Promise.resolve();
   }
 
-  ngAfterViewInit(): void {}
+  loadThemes(themeId: string) {
+    const commonCss =
+      require(`!!raw-loader!@grapecity/activereports/styles/${themeId}-ui.css`).default;
+
+    const viewerCss =
+      require(`!!raw-loader!@grapecity/activereports/styles/${themeId}-viewer.css`).default;
+    const designerCss =
+      require(`!!raw-loader!@grapecity/activereports/styles/${themeId}-designer.css`).default;
+
+    this.styles = this.sanitizer.bypassSecurityTrustHtml(`
+      <style>${commonCss}</style>
+      <style>${viewerCss}</style>
+      <style>${designerCss}</style>
+    `);
+  }
+
+  ngOnInit(): void {
+    this.loadThemes(themes[0].class);
+  }
 
   reportSelectionChanged(report) {
     this.currentReport = { id: report.src, displayName: report.name };
@@ -70,7 +93,7 @@ export class AppComponent {
   }
 
   themeChanged(themeClass) {
-    this.appClass = themeClass;
+    this.loadThemes(themeClass);
     this.changeDetectorRef.detectChanges();
   }
 

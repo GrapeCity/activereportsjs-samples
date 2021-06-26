@@ -1,14 +1,18 @@
 [
   {
-    "class": "activereportsjs-default-theme",
+    "class": "ar-js",
     "name": "Default"
   },
   {
-    "class": "activereportsjs-light-theme",
+    "class": "light-blue",
     "name": "Light"
   },
   {
-    "class": "activereportsjs-dark-theme",
+    "class": "dark-yellow",
     "name": "Dark"
+  },
+  {
+    "class": "green",
+    "name": "Green"
   }
 ]

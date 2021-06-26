@@ -3,7 +3,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 @Component({
   selector: 'app-theme-selector',
   templateUrl: './theme-selector.component.html',
-  styleUrls: ['./theme-selector.component.css'],
+  styleUrls: ['./theme-selector.component.scss'],
 })
 export class ThemeSelectorComponent implements OnInit {
   @Output() themeChanged = new EventEmitter<string>();
