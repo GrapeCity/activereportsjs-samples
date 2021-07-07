@@ -1,5 +1,11 @@
-import { ChangeDetectorRef, Component, ViewChild } from '@angular/core';
-import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { DOCUMENT } from '@angular/common';
+import {
+  ChangeDetectorRef,
+  Component,
+  Inject,
+  ViewChild,
+  ViewEncapsulation,
+} from '@angular/core';
 import {
   AR_EXPORTS,
   HtmlExportService,
@@ -9,13 +15,12 @@ import {
   XlsxExportService,
 } from '@grapecity/activereports-angular';
 import reports from './reports.json';
-import themes from './themes.json';
-declare var require: any;
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
+  encapsulation: ViewEncapsulation.None,
   providers: [
     {
       provide: AR_EXPORTS,
@@ -39,8 +44,6 @@ export class AppComponent {
   currentReport: any = { id: reports[0].src, displayName: reports[0].name };
   toolbarUpdated = false;
   reportList = reports;
-  themeList = themes;
-  public styles: SafeHtml;
 
   @ViewChild(ViewerComponent, { static: false }) reportViewer: ViewerComponent;
   @ViewChild(DesignerComponent, { static: false })
@@ -48,7 +51,7 @@ export class AppComponent {
 
   constructor(
     private changeDetectorRef: ChangeDetectorRef,
-    private sanitizer: DomSanitizer
+    @Inject(DOCUMENT) private document: Document
   ) {
     this.onRender = this.onRender.bind(this);
   }
@@ -65,24 +68,15 @@ export class AppComponent {
     return Promise.resolve();
   }
 
-  loadThemes(themeId: string) {
-    const commonCss =
-      require(`!!raw-loader!@grapecity/activereports/styles/${themeId}-ui.css`).default;
-
-    const viewerCss =
-      require(`!!raw-loader!@grapecity/activereports/styles/${themeId}-viewer.css`).default;
-    const designerCss =
-      require(`!!raw-loader!@grapecity/activereports/styles/${themeId}-designer.css`).default;
-
-    this.styles = this.sanitizer.bypassSecurityTrustHtml(`
-      <style>${commonCss}</style>
-      <style>${viewerCss}</style>
-      <style>${designerCss}</style>
-    `);
-  }
-
-  ngOnInit(): void {
-    this.loadThemes(themes[0].class);
+  ensureStylesheet(stylesheetId: string, stylesheetContent: string) {
+    const head = this.document.getElementsByTagName('head')[0];
+    var style = this.document.getElementById(stylesheetId);
+    if (!style) {
+      style = this.document.createElement('style');
+      style.id = stylesheetId;
+      style.innerHTML = stylesheetContent;
+    }
+    head?.appendChild(style);
   }
 
   reportSelectionChanged(report) {
@@ -90,11 +84,6 @@ export class AppComponent {
     if (this.designerHidden) {
       this.reportViewer.open(report.src);
     }
-  }
-
-  themeChanged(themeClass) {
-    this.loadThemes(themeClass);
-    this.changeDetectorRef.detectChanges();
   }
 
   onViewerInit() {
