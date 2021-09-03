@@ -1,8 +1,8 @@
-const chromium = require('playwright').firefox;
-const fs = require('fs');
-const node_static = require('node-static');
-const http = require('http');
-const path = require('path');
+const chromium = require("playwright").chromium;
+const fs = require("fs");
+const node_static = require("node-static");
+const http = require("http");
+const path = require("path");
 
 var file = new node_static.Server(path.resolve(__dirname, "resources"));
 
