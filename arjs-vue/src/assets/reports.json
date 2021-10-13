@@ -1,0 +1,32 @@
+[
+    {
+        "label": "Tabular",
+        "url": "/assets/reports/TabularReport.rdlx-json",
+        "paginated": true
+    },
+    {
+        "label": "Banded",
+        "url": "/assets/reports/BandedReport.rdlx-json",
+        "paginated": true
+    },
+    {
+        "label": "Fixed Layout",
+        "url": "/assets/reports/FixedLayoutReport.rdlx-json",
+        "paginated": true
+    },
+    {
+        "label": "Summary",
+        "url": "/assets/reports/SummaryReport.rdlx-json",
+        "paginated": false
+    },
+    {
+        "label": "Drill-down",
+        "url": "/assets/reports/DrillDownReport.rdlx-json",
+        "paginated": false
+    },
+    {
+        "label": "Drill-through",
+        "url": "/assets/reports/DrillThroughMainReport.rdlx-json",
+        "paginated": false
+    }
+]
