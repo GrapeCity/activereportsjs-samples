@@ -7,7 +7,7 @@ import { ReportListComponent } from './report-list/report-list.component';
 import { ThemeSelectorComponent } from './theme-selector/theme-selector.component';
 
 @NgModule({
-  declarations: [AppComponent, ReportListComponent],
+  declarations: [AppComponent, ReportListComponent, ThemeSelectorComponent],
   imports: [ActiveReportsModule, BrowserModule],
   providers: [],
   bootstrap: [AppComponent],

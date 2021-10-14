@@ -1,3 +1,4 @@
+<div [innerHtml]="styles"></div>
 <div id="app">
   <div id="list-host">
     <div class="flex-grow-1">
@@ -7,6 +8,13 @@
         (selectionChanged)="reportSelectionChanged($event)"
       ></app-report-list>
     </div>
+    <div class="flex-grow-0">
+      <h5 class="list-title">Themes:</h5>
+      <app-theme-selector
+        [themeList]="themeList"
+        (themeChanged)="themeChanged($event)"
+      ></app-theme-selector>
+    </div>    
   </div>
   <div id="designer-host" [hidden]="designerHidden">
     <gc-activereports-designer

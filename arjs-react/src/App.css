@@ -30,6 +30,7 @@
 #arjs-designer-host,
 #arjs-viewer-host {
   height: 100%;
+  flex: 1 1 auto;
 }
 
 .flex-grow-1 {

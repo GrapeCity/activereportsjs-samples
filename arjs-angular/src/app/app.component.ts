@@ -1,4 +1,5 @@
 import { DOCUMENT } from '@angular/common';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import {
   ChangeDetectorRef,
   Component,
@@ -15,6 +16,9 @@ import {
   XlsxExportService,
 } from '@grapecity/activereports-angular';
 import reports from './reports.json';
+import themes from './themes.json';
+declare var require: any;
+
 
 @Component({
   selector: 'app-root',
@@ -44,18 +48,25 @@ export class AppComponent {
   currentReport: any = { id: reports[0].src, displayName: reports[0].name };
   toolbarUpdated = false;
   reportList = reports;
+  themeList = themes;
+  public styles: SafeHtml;  
 
   @ViewChild(ViewerComponent, { static: false }) reportViewer: ViewerComponent;
   @ViewChild(DesignerComponent, { static: false })
   reportDesigner: DesignerComponent;
 
   constructor(
+    private sanitizer: DomSanitizer,
     private changeDetectorRef: ChangeDetectorRef,
     @Inject(DOCUMENT) private document: Document
   ) {
     this.onRender = this.onRender.bind(this);
   }
 
+  ngOnInit(): void {
+    this.loadThemes(themes[0].class);
+  }  
+  
   onRender(report: any): any {
     this.designerHidden = true;
     this.currentReport = { definition: report.definition };
@@ -68,16 +79,21 @@ export class AppComponent {
     return Promise.resolve();
   }
 
-  ensureStylesheet(stylesheetId: string, stylesheetContent: string) {
-    const head = this.document.getElementsByTagName('head')[0];
-    var style = this.document.getElementById(stylesheetId);
-    if (!style) {
-      style = this.document.createElement('style');
-      style.id = stylesheetId;
-      style.innerHTML = stylesheetContent;
-    }
-    head?.appendChild(style);
-  }
+  loadThemes(themeId: string) {
+    const commonCss =
+      require(`!!raw-loader!@grapecity/activereports/styles/${themeId}-ui.css`).default;
+
+    const viewerCss =
+      require(`!!raw-loader!@grapecity/activereports/styles/${themeId}-viewer.css`).default;
+    const designerCss =
+      require(`!!raw-loader!@grapecity/activereports/styles/${themeId}-designer.css`).default;
+
+    this.styles = this.sanitizer.bypassSecurityTrustHtml(`
+      <style>${designerCss}</style>
+      <style>${viewerCss}</style>
+      <style>${commonCss}</style>
+    `);
+  }  
 
   reportSelectionChanged(report) {
     this.currentReport = { id: report.src, displayName: report.name };
@@ -90,7 +106,12 @@ export class AppComponent {
     this.updateViewerToolbar();
     this.reportViewer.open(this.currentReport.id);
   }
-
+  
+  themeChanged(themeClass) {
+    this.loadThemes(themeClass);
+    this.changeDetectorRef.detectChanges();
+  }
+  
   updateViewerToolbar() {
     var designButton = {
       key: '$openDesigner',
