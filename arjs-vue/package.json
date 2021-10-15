@@ -12,6 +12,7 @@
     "@grapecity/activereports-vue": "^2.2.0",
     "@vue/composition-api": "^1.0.0-rc.5",
     "core-js": "^3.6.5",
+    "raw-loader": "^4.0.2",
     "vue": "^2.6.11"
   },
   "devDependencies": {
