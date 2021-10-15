@@ -49,6 +49,7 @@ export class AppComponent {
   toolbarUpdated = false;
   reportList = reports;
   themeList = themes;
+  themeClass = '';
   public styles: SafeHtml;  
 
   @ViewChild(ViewerComponent, { static: false }) reportViewer: ViewerComponent;
@@ -108,6 +109,7 @@ export class AppComponent {
   }
   
   themeChanged(themeClass) {
+    this.themeClass = themeClass;
     this.loadThemes(themeClass);
     this.changeDetectorRef.detectChanges();
   }
