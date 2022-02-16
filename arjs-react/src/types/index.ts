@@ -1,4 +1,4 @@
-import { RDLReportDefinition } from "@grapecity/activereports/core";
+import { Rdl } from "@grapecity/activereports/core";
 import { ReportDefinition } from "@grapecity/activereports/reportdesigner";
 
 export type DesignerMode = "designer";
@@ -9,7 +9,7 @@ export type AppMode = DesignerMode | ViewerMode;
 export type ReportDescriptior = {
   label: string;
   url: string;
-  definition?: RDLReportDefinition;
+  definition?: Rdl.Report;
   paginated: boolean;
 };
 

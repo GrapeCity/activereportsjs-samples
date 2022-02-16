@@ -2,9 +2,6 @@ import React, { useCallback } from "react";
 import {
   Viewer as ReportViewer,
 } from "@grapecity/activereports-react";
-import "@grapecity/activereports/pdfexport";
-import "@grapecity/activereports/htmlexport";
-import "@grapecity/activereports/xlsxexport";
 import { ReportDescriptior, ViewerProps } from "../types";
 
 
@@ -54,5 +51,5 @@ export const Viewer = ({ report, onEdit}: ViewerProps) => {
     }
   }, [report.definition, report.url, reportUri]);
 
-  return <ReportViewer ref={ref}  />;
+  return <ReportViewer ref={ref} availableExports={["pdf", "html", "tabular-data"]}  />;
 };
