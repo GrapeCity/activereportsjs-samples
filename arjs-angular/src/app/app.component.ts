@@ -13,7 +13,7 @@ import {
   PdfExportService,
   ViewerComponent,
   DesignerComponent,
-  XlsxExportService,
+  TabularDataExportService,
 } from '@grapecity/activereports-angular';
 import reports from './reports.json';
 import themes from './themes.json';
@@ -38,7 +38,7 @@ declare var require: any;
     },
     {
       provide: AR_EXPORTS,
-      useClass: XlsxExportService,
+      useClass: TabularDataExportService,
       multi: true,
     },
   ],
