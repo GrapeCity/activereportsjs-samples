@@ -22,7 +22,7 @@
 
     <div id="host">
       <div id="viewer-host" v-show="previewMode">
-        <ReportViewer ref="reportViewer" />
+        <ReportViewer ref="reportViewer" v-bind:availableExports = "availableExports"  />
       </div>
       <div id="designer-host" v-show="!previewMode">
         <ReportDesigner ref="reportDesigner" :onRender="onRender" />
@@ -34,7 +34,7 @@
 <script>
 import { Viewer, Designer } from "@grapecity/activereports-vue";
 // eslint-disable-next-line
-import { PdfExport, XlsxExport, HtmlExport } from "@grapecity/activereports";
+import { TabularDataExport, XlsxExport, HtmlExport } from "@grapecity/activereports";
 import List from "./components/List.vue";
 import reports from "./assets/reports.json";
 import themes from "./assets/themes.json";
@@ -54,6 +54,7 @@ export default {
   },
   data() {
     return {
+      availableExports: ['pdf', 'html', 'tabular-data'],
       previewMode: true,
       reportsList: reportLabels,
       currentReportIndex: undefined,
