@@ -1,16 +1,13 @@
 const chromium = require("playwright").chromium;
 const fs = require("fs");
-const node_static = require("node-static");
-const http = require("http");
 const path = require("path");
+const express = require("express");
+const app = express();
 
-var file = new node_static.Server(path.resolve(__dirname, "resources"));
+app.use(express.static(path.join(__dirname, "resources")));
+app.use("/scripts", express.static(path.join(__dirname, "node_modules", "@grapecity" , "activereports" ,"dist")));
 
-http
-  .createServer(function (req, res) {
-    file.serve(req, res);
-  })
-  .listen(9999);
+app.listen(9999);
 
 (async () => {
   const browser = await chromium.launch({
@@ -22,11 +19,13 @@ http
   await page.goto(`http://localhost:9999/index.html`);
 
   const pdfString = await page.evaluate(
-    ({ reportUrl }) =>
+    ({ reportUrl, categories }) =>
       new Promise(async (resolve, reject) => {
         await GC.ActiveReports.Core.FontStore.registerFonts("fontsConfig.json");
         const report = new GC.ActiveReports.Core.PageReport();
         await report.load(reportUrl);
+        report.parameters["DisplayedCategories"].values = categories;
+        await report.resolveParametersValues();
         const doc = await report.run();
         const result = await GC.ActiveReports.PdfExport.exportDocument(doc, {
           info: { author: "GrapeCity" },
@@ -37,11 +36,12 @@ http
         reader.onerror = () =>
           reject("Error occurred while reading binary string");
       }),
-    { reportUrl: "ProductsList.rdlx-json" }
+    { reportUrl: "ProductsList.rdlx-json", categories: [2, 4, 5, 6] }
   );
 
   const pdfData = Buffer.from(pdfString, "binary");
-  fs.writeFileSync(`${__dirname}/ProductsList.pdf`, pdfData);
-  console.log("done");
+  const pdfPath = path.join(__dirname, "ProductsList.pdf");
+  fs.writeFileSync(pdfPath, pdfData);
+  console.log(`The report was exported to ${pdfPath}`);
   process.exit(0);
 })();

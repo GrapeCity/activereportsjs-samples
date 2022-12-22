@@ -8,9 +8,9 @@
   },
   "author": "GrapeCity",
   "license": "ISC",
-  "devDependencies": {},
   "dependencies": {
-    "node-static": "^0.7.11",
+    "@grapecity/activereports": "^3.2.2",
+    "express": "^4.18.2",
     "playwright": "^1.7.1"
   }
 }

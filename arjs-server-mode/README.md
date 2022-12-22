@@ -1,24 +1,22 @@
 # Using ActiveReportJS with node.js
 
-This sample shows how to use ActiveReportsJS with node.js to export a report to PDF on the server-side.
-The code runs the headless browser, loads the page that hosts ActiveReportsJS scripts, and executes the script that exports a report to PDF.
+This sample demonstrates how to use ActiveReportsJS with Node.js to generate a PDF report on the server side. 
+The process involves running a headless browser, loading the page that hosts the ActiveReportsJS scripts, and executing the script that exports the report to PDF.
 
-To run the code, execute the following commands.
+To run the code, enter the following commands:
 
 ```bash
 npm install
-node index.js
+npm start
 ```
 
-or if you are using ```yarn```
+Alternatively, if you are using `yarn`, enter the following commands:
 
 ```bash
 yarn
-node index.js
+yarn start
 ```
 
-The code will create a ```ProductsList.pdf``` file in the root folder.
+After running the code, you will find a `ProductsList.pdf` file in the root directory.
 
-
-
-Note that this approach requires a single domain license.
+Please note that this approach requires a [single domain license](https://www.grapecity.com/activereportsjs/pricing).
