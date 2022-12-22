@@ -21,6 +21,7 @@ app.listen(9999);
   const pdfString = await page.evaluate(
     ({ reportUrl, categories }) =>
       new Promise(async (resolve, reject) => {
+        // GC.ActiveReports.Core.setLicenseKey(<INSERT YOUR DISTRIBUTION KEY HERE>)
         await GC.ActiveReports.Core.FontStore.registerFonts("fontsConfig.json");
         const report = new GC.ActiveReports.Core.PageReport();
         await report.load(reportUrl);
