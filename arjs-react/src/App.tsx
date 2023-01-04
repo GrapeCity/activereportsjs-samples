@@ -52,24 +52,22 @@ export const App = () => {
           </div>
         </div>
         <div id="host">
-          <div
-            id="arjs-designer-host"
-            className={mode === "viewer" ? "hidden" : ""}
-          >
-            <Designer
-              report={reportMap.current[reportIndex]}
-              onRender={handleOnRender}
-            />
-          </div>
-          <div
-            id="arjs-viewer-host"
-            className={mode === "designer" ? "hidden" : ""}
-          >
-            <Viewer
-              report={reportMap.current[reportIndex]}
-              onEdit={() => setMode("designer")}
-            />
-          </div>
+          {mode === "designer" && (
+            <div id="arjs-designer-host">
+              <Designer
+                report={reportMap.current[reportIndex]}
+                onRender={handleOnRender}
+              />
+            </div>
+          )}
+          {mode === "viewer" && (
+            <div id="arjs-viewer-host">
+              <Viewer
+                report={reportMap.current[reportIndex]}
+                onEdit={() => setMode("designer")}
+              />
+            </div>
+          )}
         </div>
       </div>
       {themeCss.map((html, key) => (
