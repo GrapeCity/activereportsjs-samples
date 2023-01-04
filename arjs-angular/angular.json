@@ -18,6 +18,12 @@
         "build": {
           "builder": "@angular-builders/custom-webpack:browser",
           "options": {
+            "customWebpackConfig": {
+              "path": "./webpack.config.js",
+              "mergeRules": {
+                "externals": "replace"
+              }
+            },            
             "outputPath": "dist/angular-viewer-and-designer",
             "index": "src/index.html",
             "main": "src/main.ts",
