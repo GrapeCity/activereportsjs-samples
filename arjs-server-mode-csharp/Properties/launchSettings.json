@@ -1,0 +1,11 @@
+{
+  "profiles": {
+    "ActiveReportsJS.ServerSide.NET": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "http://localhost:63368"
+    }
+  }
+}
