@@ -66,6 +66,7 @@ export class AppComponent {
 
   ngOnInit(): void {
     this.loadThemes(themes[0].class);
+    this.reportDesigner.setReport(this.currentReport);
   }  
   
   onRender(report: any): any {
