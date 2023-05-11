@@ -8,7 +8,7 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
-    "@grapecity/activereports-vue": "^3.2.0",
+    "@grapecity/activereports-vue": "^4.0.0",
     "@vue/composition-api": "^1.0.0-rc.5",
     "core-js": "^3.6.5",
     "raw-loader": "^4.0.2",
