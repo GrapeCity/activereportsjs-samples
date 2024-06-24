@@ -5,7 +5,7 @@ const express = require("express");
 const app = express();
 
 app.use(express.static(path.join(__dirname, "resources")));
-app.use("/scripts", express.static(path.join(__dirname, "node_modules", "@grapecity" , "activereports" ,"dist")));
+app.use("/scripts", express.static(path.join(__dirname, "node_modules", "@mescius" , "activereportsjs" ,"dist")));
 
 app.listen(9999);
 
@@ -21,15 +21,21 @@ app.listen(9999);
   const pdfString = await page.evaluate(
     ({ reportUrl, categories }) =>
       new Promise(async (resolve, reject) => {
+        debugger;
         // GC.ActiveReports.Core.setLicenseKey(<INSERT YOUR DISTRIBUTION KEY HERE>)
-        await GC.ActiveReports.Core.FontStore.registerFonts("fontsConfig.json");
-        const report = new GC.ActiveReports.Core.PageReport();
-        await report.load(reportUrl);
-        report.parameters["DisplayedCategories"].values = categories;
-        await report.resolveParametersValues();
+        await MESCIUS.ActiveReportsJS.Core.FontStore.registerFonts("fontsConfig.json");
+        const report = new MESCIUS.ActiveReportsJS.Core.PageReport();
+        await report.load(reportUrl, {
+          reportParameters: [
+            {
+              Name: "DisplayedCategories",
+              Value: categories
+            }
+          ]
+        });
         const doc = await report.run();
-        const result = await GC.ActiveReports.PdfExport.exportDocument(doc, {
-          info: { author: "GrapeCity" },
+        const result = await MESCIUS.ActiveReportsJS.PdfExport.exportDocument(doc, {
+          info: { author: "MESCIUS" },
         });
         const reader = new FileReader();
         reader.readAsBinaryString(result.data);
