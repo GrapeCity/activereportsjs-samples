@@ -22,7 +22,7 @@ app.listen(9999);
     ({ reportUrl, categories }) =>
       new Promise(async (resolve, reject) => {
         debugger;
-        // GC.ActiveReports.Core.setLicenseKey(<INSERT YOUR DISTRIBUTION KEY HERE>)
+        // MESCIUS.ActiveReportsJS.Core.setLicenseKey(<INSERT YOUR DISTRIBUTION KEY HERE>)
         await MESCIUS.ActiveReportsJS.Core.FontStore.registerFonts("fontsConfig.json");
         const report = new MESCIUS.ActiveReportsJS.Core.PageReport();
         await report.load(reportUrl, {
