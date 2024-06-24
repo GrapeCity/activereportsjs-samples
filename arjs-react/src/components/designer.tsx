@@ -1,4 +1,4 @@
-import { Designer as ReportDesigner } from "@grapecity/activereports-react";
+import { Designer as ReportDesigner } from "@mescius/activereportsjs-react";
 import { DesignerProps, ReportDescriptior } from "../types";
 
 const reportUri: (report: ReportDescriptior) => any = (report) =>
@@ -7,6 +7,7 @@ const reportUri: (report: ReportDescriptior) => any = (report) =>
     : { id: report.url, displayName: report.label };
 
 export const Designer = ({ report, onRender }: DesignerProps) => {
+
   return (
     <ReportDesigner
       report={reportUri(report)}

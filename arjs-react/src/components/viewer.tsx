@@ -1,7 +1,8 @@
 import React, { useCallback } from "react";
 import {
   Viewer as ReportViewer,
-} from "@grapecity/activereports-react";
+
+} from "@mescius/activereportsjs-react";
 import { ReportDescriptior, ViewerProps } from "../types";
 
 
@@ -48,8 +49,10 @@ export const Viewer = ({ report, onEdit}: ViewerProps) => {
     if(ref.current){
       ref.current.Viewer.renderMode = report.paginated ? "Paginated" :  "Galley";
       ref.current.Viewer.open(reportUri(report));
+      
     }
   }, [report.definition, report.url, reportUri]);
+
 
   return <ReportViewer ref={ref} availableExports={["pdf", "html", "tabular-data"]}  />;
 };
