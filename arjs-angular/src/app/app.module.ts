@@ -1,15 +1,22 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
 
+import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ActiveReportsModule } from '@grapecity/activereports-angular';
+import { ActiveReportsModule } from '@mescius/activereportsjs-angular';
 import { ReportListComponent } from './report-list/report-list.component';
-import { ThemeSelectorComponent } from './theme-selector/theme-selector.component';
 
 @NgModule({
-  declarations: [AppComponent, ReportListComponent, ThemeSelectorComponent],
-  imports: [ActiveReportsModule, BrowserModule],
+  declarations: [
+    AppComponent,
+    ReportListComponent
+  ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    ActiveReportsModule
+  ],
   providers: [],
-  bootstrap: [AppComponent],
+  bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }

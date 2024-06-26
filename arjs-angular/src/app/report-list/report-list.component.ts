@@ -11,7 +11,7 @@ export class ReportListComponent implements OnInit {
   activeIndex = 0;
   constructor() {}
 
-  onItemClick(report, index) {
+  onItemClick(report:any, index:any) {
     this.activeIndex = index;
     this.selectionChanged.emit(report);
   }
