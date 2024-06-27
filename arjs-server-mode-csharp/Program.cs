@@ -39,17 +39,22 @@ await page.GotoAsync(appUrl);
 
 var exportTask = page.EvaluateAsync(@"({reportUrl,categories, apiRoot}) => 
       new Promise(async (resolve, reject) => { 
-        // GC.ActiveReports.Core.setLicenseKey(<INSERT YOUR DISTRIBUTION KEY HERE>)
-        await GC.ActiveReports.Core.FontStore.registerFonts('fontsConfig.json');
+        // MESCIUS.ActiveReportsJS.Core.setLicenseKey(<INSERT YOUR DISTRIBUTION KEY HERE>)
+        await MESCIUS.ActiveReportsJS.Core.FontStore.registerFonts('fontsConfig.json');
         const reportDef = await (await fetch(reportUrl)).json();
         reportDef.DataSources[0].ConnectionProperties.ConnectString = 'endpoint=' + apiRoot;
-        const report = new GC.ActiveReports.Core.PageReport();
-        await report.load(reportDef);
-        report.parameters['DisplayedCategories'].values = categories;
-        await report.resolveParametersValues();
+        const report = new MESCIUS.ActiveReportsJS.Core.PageReport();
+        await report.load(reportUrl, {
+          reportParameters: [
+            {
+              Name: 'DisplayedCategories',
+              Value: categories
+            }
+          ]
+        });
         const doc = await report.run();
-        const result = await GC.ActiveReports.PdfExport.exportDocument(doc, {
-          info: { author: 'GrapeCity' },
+        const result = await MESCIUS.ActiveReportsJS.PdfExport.exportDocument(doc, {
+          info: { author: 'MESCIUS' },
         });
         result.download();
         resolve();

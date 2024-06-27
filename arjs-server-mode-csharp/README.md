@@ -16,4 +16,4 @@ pwsh bin/Debug/netX/playwright.ps1 install
 
 After running the code, you will find a pdf file in the root directory of the application.
 
-Please note that this approach requires a [single domain license](https://www.grapecity.com/activereportsjs/pricing).
+Please note that this approach requires a [single domain license](https://developer.mescius.com/activereportsjs/pricing).
