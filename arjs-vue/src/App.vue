@@ -1,26 +1,15 @@
 <template>
-  <div id="app" v-bind:class="currentThemeId()">
-    <div v-html="styles"></div>
+  <div id="app-host">
     <div id="list-host">
-      <div class="flex-grow-1">
         <List
           title="Reports"
           v-bind:items="reportsList"
           v-bind:current-index="currentReportIndex"
           v-on:selectionChanged="updateReportIndex"
         />
-      </div>
-      <div class="flex-grow-0">
-        <List
-          title="Themes"
-          v-bind:items="themeList"
-          v-bind:current-index="currentThemeIndex"
-          v-on:selectionChanged="updateThemeIndex"
-        />
-      </div>
     </div>
 
-    <div id="host">
+    <div id="report-host">
       <div id="viewer-host" v-show="previewMode">
         <ReportViewer ref="reportViewer" v-bind:availableExports = "availableExports"  />
       </div>
@@ -32,18 +21,15 @@
 </template>
 
 <script>
-import { Viewer, Designer } from "@grapecity/activereports-vue";
+import { Viewer, Designer } from "@mescius/activereportsjs-vue";
 // eslint-disable-next-line
-import { TabularDataExport, XlsxExport, HtmlExport } from "@grapecity/activereports";
+import { TabularDataExport, XlsxExport, HtmlExport } from "@mescius/activereportsjs";
 import List from "./components/List.vue";
 import reports from "./assets/reports.json";
-import themes from "./assets/themes.json";
 
 const reportLabels = reports.map((r) => r.label);
 
 const reportsMap = reports.map((r) => ({ ...r, definition: undefined }));
-
-const themeList = themes.map((theme) => theme.name);
 
 export default {
   name: "App",
@@ -60,8 +46,6 @@ export default {
       currentReportIndex: undefined,
       currentThemeIndex: undefined,
       reportsMap: reportsMap,
-      themeList: themeList,
-      styles: "",
     };
   },
   mounted() {
@@ -97,20 +81,8 @@ export default {
       ],
     });
     this.updateReportIndex(0);
-    this.updateThemeIndex(0);
   },
   methods: {
-    applyTheme(themeId) {
-      const designerCss = require(`!!raw-loader!@grapecity/activereports/styles/${themeId}-designer.css`)
-        .default;
-
-      const viewerCss = require(`!!raw-loader!@grapecity/activereports/styles/${themeId}-viewer.css`)
-        .default;
-
-      const commonCss = require(`!!raw-loader!@grapecity/activereports/styles/${themeId}-ui.css`)
-        .default;
-      this.styles = `<style>${designerCss}</style><style>${viewerCss}</style><style>${commonCss}</style>`;
-    },
     getReportDesign() {
       const report = this.reportsMap[this.currentReportIndex];
       return report.definition
@@ -132,73 +104,38 @@ export default {
       this.$refs.reportViewer.open(this.getReportPreview());
       this.$refs.reportDesigner.setReport(this.getReportDesign());
     },
-    currentThemeId() {
-      return themes[this.currentThemeIndex || 0].id;
-    },
-    updateThemeIndex(index) {
-      this.currentThemeIndex = index;
-      this.applyTheme(this.currentThemeId());
-    },
   },
 };
 </script>
 
 <style>
-@import "https://cdn.materialdesignicons.com/2.8.94/css/materialdesignicons.min.css";
-</style>
 
-<style>
 body {
-  font-size: 1rem;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-    Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
-  padding: 0;
   margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-#app {
+#app-host {
   display: flex;
-  flex-direction: row;
   height: 100vh;
-  font-size: 16px;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-    Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
-  padding: 0;
-  margin: 0;
 }
 
 #list-host {
-  display: flex;
-  flex-direction: column;
-  flex: 0 0 auto;
-  height: 100%;
-  background-color: #f1f1f1;
-  overflow: hidden;
+  flex: 0 0 15%; 
+  height: 100%; 
+  background-color: #f1f1f1; 
+  overflow-y: auto; 
 }
 
-.dark-yellow #list-host {
-  background-color: #3b3c3f;
-  color: #e6e6e6;
+#report-host {
+  flex: 1; 
+  height: 100%; 
+  overflow-y: auto; 
 }
 
-#host {
-  flex: 1 1 auto;
+#viewer-host, #designer-host {
+  height: 100%; 
 }
 
-#designer-host,
-#viewer-host {
-  height: 100%;
-}
-
-.flex-grow-1 {
-  flex-grow: 1;
-}
-
-.flex-grow-0 {
-  flex-grow: 0;
-}
-
-.hidden {
-  display: none;
-}
 </style>
