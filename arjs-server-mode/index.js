@@ -21,8 +21,9 @@ app.listen(9999);
   const pdfString = await page.evaluate(
     ({ reportUrl, categories }) =>
       new Promise(async (resolve, reject) => {
-        debugger;
+        // debugger;
         // MESCIUS.ActiveReportsJS.Core.setLicenseKey(<INSERT YOUR DISTRIBUTION KEY HERE>)
+      
         await MESCIUS.ActiveReportsJS.Core.FontStore.registerFonts("fontsConfig.json");
         const report = new MESCIUS.ActiveReportsJS.Core.PageReport();
         await report.load(reportUrl, {

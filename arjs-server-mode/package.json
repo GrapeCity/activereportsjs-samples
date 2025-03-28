@@ -9,8 +9,8 @@
   "author": "GrapeCity",
   "license": "ISC",
   "dependencies": {
-    "@mescius/activereportsjs": "^5.0.0",
+    "@mescius/activereportsjs": "^5.2.1",
     "express": "^4.18.2",
-    "playwright": "^1.7.1"
+    "playwright": "^1.51.1"
   }
 }
